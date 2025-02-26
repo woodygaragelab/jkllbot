@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { TextField, Button, Paper, Box, Typography } from "@mui/material";
 
+const API_URL = "https://8upalv7sa8.execute-api.ap-northeast-1.amazonaws.com/default/jakalulubot";										
+
 interface Message {
   id: string;
   text: string;
@@ -14,12 +16,12 @@ const ChatApp: React.FC = () => {
   const [input, setInput] = useState("");
 
   useEffect(() => {
-    fetchMessages();
+    //fetchMessages();
   }, []);
 
   const fetchMessages = async () => {
     try {
-      const response = await axios.get("https://your-api-gateway-url/messages");
+      const response = await axios.get(API_URL);
       setMessages(response.data);
     } catch (error) {
       console.error("Error fetching messages", error);
@@ -28,12 +30,31 @@ const ChatApp: React.FC = () => {
 
   const sendMessage = async () => {
     if (!input.trim()) return;
-    const newMessage = { text: input, sender: "User" };
+    const newMessage = {										
+      text: input,										
+      sender: "User",										
+      timestamp: new Date().toISOString(),										
+    };										
+    // setMessages([...messages, { id: Date.now().toString(), ...newMessage }]);		
+    var message_history = [...messages, { id: Date.now().toString(), ...newMessage }]
+		setMessages(message_history);		
+      
 
     try {
-      await axios.post("https://your-api-gateway-url/messages", newMessage);
+      const response = await axios.post(API_URL, newMessage);			
+      const res = response.data.body;															
+      console.log(res);
+      const resMessage = {										
+        text: res,										
+        sender: "Bot",										
+        timestamp: new Date().toISOString(),										
+      };										
+      // setMessages([...messages, { id: Date.now().toString(), ...resMessage }]);																	
+      message_history = [...message_history, { id: Date.now().toString(), ...resMessage }]
+		  setMessages(message_history);		
+      
       setInput("");
-      fetchMessages();
+      // fetchMessages();
     } catch (error) {
       console.error("Error sending message", error);
     }
