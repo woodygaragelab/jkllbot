@@ -19,14 +19,14 @@ const ChatApp: React.FC = () => {
     //fetchMessages();
   }, []);
 
-  const fetchMessages = async () => {
-    try {
-      const response = await axios.get(API_URL);
-      setMessages(response.data);
-    } catch (error) {
-      console.error("Error fetching messages", error);
-    }
-  };
+  // const fetchMessages = async () => {
+  //   try {
+  //     const response = await axios.get(API_URL);
+  //     setMessages(response.data);
+  //   } catch (error) {
+  //     console.error("Error fetching messages", error);
+  //   }
+  // };
 
   const sendMessage = async () => {
     if (!input.trim()) return;
