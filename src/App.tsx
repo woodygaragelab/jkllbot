@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 // import ReactDOM from 'react-dom';
 // import './styles.css'; // 別途CSSを用意する場合
 import ChatApp from './ChatApp.tsx'
+import SearchApp from './SearchApp.tsx'
 
 // 各画面のコンポーネント
 interface PanelProps {
@@ -24,15 +25,15 @@ const Panel: React.FC<PanelProps> = ({ title }) => {
 };
 
 const App: React.FC = () => {
-  const [activeMenu, setActiveMenu] = useState<string>('課題');
+  const [activeMenu, setActiveMenu] = useState<string>('Search');
 
   const renderPanel = () => {
     // activeMenuに応じたコンポーネントを返す
     switch(activeMenu) {
+      case 'Search':
+        return <SearchApp/>;
       case '課題':
         return <Panel title="課題" />;
-      case '検索':
-        return <Panel title="検索" />;
       case 'Chat':
         return <ChatApp/>;
       default:
@@ -44,7 +45,7 @@ const App: React.FC = () => {
     <div className="container">
       <div className="sidebar">
         <ul>
-          {['課題', '検索', 'Chat'].map((menu) => (
+          {['Search','課題', 'Chat'].map((menu) => (
             <li
               key={menu}
               className={menu === activeMenu ? 'active' : ''}
