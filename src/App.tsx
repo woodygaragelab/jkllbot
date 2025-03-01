@@ -1,39 +1,19 @@
 import React, { useState } from 'react';
-// import ReactDOM from 'react-dom';
-// import './styles.css'; // 別途CSSを用意する場合
 import ChatApp from './ChatApp.tsx'
 import SearchApp from './SearchApp.tsx'
-
-// 各画面のコンポーネント
-interface PanelProps {
-  title: string;
-}
-
-const Panel: React.FC<PanelProps> = ({ title }) => {
-  return (
-    <div className="panel">
-      <h2>{title}</h2>
-      <div className="form-group">
-        <input type="text" placeholder="入力フィールド1" />
-      </div>
-      <div className="form-group">
-        <input type="text" placeholder="入力フィールド2" />
-      </div>
-      <button>{title} ボタン</button>
-    </div>
-  );
-};
+import MyIssue from './MyIssue.tsx'
+import Header from './Header.tsx'
+import Footer from './Footer.tsx'
 
 const App: React.FC = () => {
-  const [activeMenu, setActiveMenu] = useState<string>('Search');
+  const [activeMenu, setActiveMenu] = useState<string>('支援企業');
 
   const renderPanel = () => {
-    // activeMenuに応じたコンポーネントを返す
     switch(activeMenu) {
-      case 'Search':
+      case '支援企業':
         return <SearchApp/>;
-      case '課題':
-        return <Panel title="課題" />;
+      case 'あなたの課題':
+        return <MyIssue />;
       case 'Chat':
         return <ChatApp/>;
       default:
@@ -42,23 +22,27 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="container">
-      <div className="sidebar">
-        <ul>
-          {['Search','課題', 'Chat'].map((menu) => (
-            <li
-              key={menu}
-              className={menu === activeMenu ? 'active' : ''}
-              onClick={() => setActiveMenu(menu)}
-            >
-              {menu}
-            </li>
-          ))}
-        </ul>
+    <div className="app-container">
+      <Header />
+      <div className="main-content">
+        <div className="sidebar">
+          <ul>
+            {['あなたの課題', '支援企業', 'Chat'].map((menu) => (
+              <li
+                key={menu}
+                className={menu === activeMenu ? 'active' : ''}
+                onClick={() => setActiveMenu(menu)}
+              >
+                {menu}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="content">
+          {renderPanel()}
+        </div>
       </div>
-      <div className="content">
-        {renderPanel()}
-      </div>
+      <Footer />
     </div>
   );
 };
@@ -66,37 +50,71 @@ const App: React.FC = () => {
 // スタイルをJSX内に記述する場合（必要に応じてstyles.cssに記載してもOK）
 const style = document.createElement('style');
 style.innerHTML = `
-  .container {
-    display: flex;
-    height: 100vh;
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
     font-family: Arial, sans-serif;
+  }
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+  }
+  .header {
+    position: absolute;
+    width: 100%;
+    padding: 15px;
+    background-color:rgb(255, 0, 0);
+    color: white;
+    text-align: center;
+    font-size: 14px;
+  }
+  .footer {
+    // position: absolute;
+    // bottom: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+  }
+  .main-content {
+    display: flex;
+    flex: 1;
   }
   .sidebar {
     width: 200px;
+    padding-top: 50px;
     background-color: #f0f0f0;
   }
   .sidebar ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
   }
   .sidebar li {
     padding: 15px;
     cursor: pointer;
     border-bottom: 1px solid #ccc;
+    text-align: center;
   }
   .sidebar li.active {
     background-color: #ddd;
     font-weight: bold;
   }
   .content {
+    width: 600px;
+    padding: 50px;
     flex: 1;
-    padding: 2px;
   }
   .panel {
     border: 1px solid #ccc;
     padding: 20px;
     border-radius: 4px;
+    background: #fff;
   }
   .form-group {
     margin-bottom: 10px;
@@ -108,6 +126,9 @@ style.innerHTML = `
   }
   button {
     padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
     cursor: pointer;
   }
 `;

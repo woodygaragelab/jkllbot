@@ -65,7 +65,7 @@ const ChatApp: React.FC = () => {
     // <Paper elevation={2} sx={{ p: 2, maxWidth: 400, mx: "auto", mt: 1 }}>
     <Paper elevation={2} sx={{ p: 2, maxWidth: 800, mx: 1, mt: 1 }}>
     <Typography variant="h6" gutterBottom>Chat</Typography>
-      <Box sx={{ height: 400, width: 400, overflowY: "auto", border: 1, p: 1, mb: 2 }}>
+      <Box sx={{ height: 400, width: 600, overflowY: "auto", border: 1, p: 1, mb: 2 }}>
         {messages.map((msg) => (
           <Typography key={msg.id} variant="body2" sx={{ mb: 1 }}>
             <strong>{msg.sender}:</strong> {msg.text}

@@ -3,5 +3,5 @@ POST https://myxbf4zyne.execute-api.ap-northeast-1.amazonaws.com/default
 Content-Type: application/json
 
 {
-    "text": "vs code"
+    "text": "こんにちは"
 }
