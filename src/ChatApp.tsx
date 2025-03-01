@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { TextField, Button, Paper, Box, Typography } from "@mui/material";
 
-const API_URL = "https://8upalv7sa8.execute-api.ap-northeast-1.amazonaws.com/default/jakalulubot";										
+// const API_URL = "https://8upalv7sa8.execute-api.ap-northeast-1.amazonaws.com/default/jakalulubot";										
+const API_URL = "https://myxbf4zyne.execute-api.ap-northeast-1.amazonaws.com/default";
 
 interface Message {
   id: string;
