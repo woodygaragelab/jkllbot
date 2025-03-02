@@ -4,6 +4,9 @@ import SearchApp from './SearchApp.tsx'
 import MyIssue from './MyIssue.tsx'
 import Header from './Header.tsx'
 import Footer from './Footer.tsx'
+import { ThemeProvider } from "@mui/material/styles";
+// import { CssBaseline, Button } from "@mui/material";
+import { theme } from "./theme.ts";
 
 const App: React.FC = () => {
   const [activeMenu, setActiveMenu] = useState<string>('支援企業');
@@ -22,6 +25,7 @@ const App: React.FC = () => {
   };
 
   return (
+    <ThemeProvider theme={theme}>
     <div className="app-container">
       <Header />
       <div className="main-content">
@@ -44,6 +48,7 @@ const App: React.FC = () => {
       </div>
       <Footer />
     </div>
+    </ThemeProvider>
   );
 };
 

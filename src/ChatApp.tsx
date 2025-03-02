@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { TextField, Button, Paper, Box, Typography } from "@mui/material";
 
-// const API_URL = "https://8upalv7sa8.execute-api.ap-northeast-1.amazonaws.com/default/jakalulubot";										
 const API_URL = "https://myxbf4zyne.execute-api.ap-northeast-1.amazonaws.com/default";
 
 interface Message {
@@ -36,7 +35,6 @@ const ChatApp: React.FC = () => {
       sender: "User",										
       timestamp: new Date().toISOString(),										
     };										
-    // setMessages([...messages, { id: Date.now().toString(), ...newMessage }]);		
     var message_history = [...messages, { id: Date.now().toString(), ...newMessage }]
 		setMessages(message_history);		
       
@@ -50,7 +48,6 @@ const ChatApp: React.FC = () => {
         sender: "Bot",										
         timestamp: new Date().toISOString(),										
       };										
-      // setMessages([...messages, { id: Date.now().toString(), ...resMessage }]);																	
       message_history = [...message_history, { id: Date.now().toString(), ...resMessage }]
 		  setMessages(message_history);		
       
@@ -62,7 +59,6 @@ const ChatApp: React.FC = () => {
   };
 
   return (
-    // <Paper elevation={2} sx={{ p: 2, maxWidth: 400, mx: "auto", mt: 1 }}>
     <Paper elevation={2} sx={{ p: 2, maxWidth: 800, mx: 1, mt: 1 }}>
     <Typography variant="h6" gutterBottom>Chat</Typography>
       <Box sx={{ height: 400, width: 600, overflowY: "auto", border: 1, p: 1, mb: 2 }}>
